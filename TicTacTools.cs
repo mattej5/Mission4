@@ -46,9 +46,10 @@ namespace Mission4
             Console.WriteLine("1   2   3");
             for (int i = 0; i < 3; i++)
             {
-                Console.Write((i + 1) + " ");
+                
                 for (int j = 0; j < 3; j++)
                 {
+                    Console.Write((i + 1) + " ");
                     Console.Write(" " + array[i, j] + " ");
                 }
             }
@@ -79,12 +80,12 @@ namespace Mission4
             }
 
             // Check along diagonals
-            if (array[0, 0] == array[1, 1] && array[0, 0] ==  (array[2, 2])
+            if (array[0, 0] == array[1, 1] && array[0, 0] == array[2, 2])
             {
                 hasWinner = true;
             }
 
-            else if (array[0, 2] == array[1, 1] && array[0, 2] == (array[2, 0])
+            else if (array[0, 2] == array[1, 1] && array[0, 2] == array[2, 0])
             {
                 hasWinner = true;
             }
