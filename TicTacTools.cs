@@ -30,7 +30,7 @@ namespace Mission4
             return isPossible;
         }
 
-        public char[,] PrintBoard(char[,] array, int row, int column, int roundNumber)
+        public char[,] PrintArray(char[,] array, int row, int column, int roundNumber)
         {
             char playerChar;
 
@@ -79,12 +79,12 @@ namespace Mission4
             }
 
             // Check along diagonals
-            if (array[0, 0] == array[1, 1] && array[0, 0] ==  (array[2, 2]))
+            if (array[0, 0] == array[1, 1] && array[0, 0] ==  (array[2, 2])
             {
                 hasWinner = true;
             }
 
-            else if (array[0, 2] == array[1, 1] && array[0, 2] == (array[2, 0]))
+            else if (array[0, 2] == array[1, 1] && array[0, 2] == (array[2, 0])
             {
                 hasWinner = true;
             }
