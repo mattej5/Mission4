@@ -16,8 +16,8 @@ char[,] board = new char[3,3]
     {' ', ' ', ' '}
 };
 //initializing our variables
-int row = 0;
-int column = 0;
+int row = -1;
+int column = -1;
 int roundNumber = 0;
 int currentPlayer = 1;
 bool winCase = false;

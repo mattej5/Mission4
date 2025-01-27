@@ -1,96 +1,73 @@
-﻿// Use this space to write methods for the main class
-using System.ComponentModel;
-
-//The supporting class (with whichever name you choose) will:
-//• Receive the “board” array from the driver class
-//• Contain a method that prints the board based on the information passed to it
-//• Contain a method that receives the game board array as input and returns if there is a
-//winner and who it was
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Linq;
-
-namespace Mission4
+﻿namespace Mission4
 {
-    internal class TicTacTools
+    public class TicTacTools
     {
-        public bool IsPossible(char[,] array, int row, int column)
+        // Method to print the board
+        public void PrintBoard(char[,] board, int row, int column, int roundNumber)
         {
-            bool isPossible = true;
-
-            if (array[row - 1, column - 1] != ' ')
+            // Update the board with the current player's symbol
+            char currentSymbol = (roundNumber % 2 == 0) ? 'X' : 'O';
+            if (row >= 0 && row < 3 && column >= 0 && column < 3)
             {
-                isPossible = false;
+                board[row, column] = currentSymbol;
             }
 
-            return isPossible;
-        }
-
-        public char[,] PrintArray(char[,] array, int row, int column, int roundNumber)
-        {
-            char playerChar;
-
-            if (roundNumber % 2 == 0)
-            {
-                playerChar = 'O';
-            }
-            else
-            {
-                playerChar = 'X';
-            }
-
-            Console.WriteLine("1   2   3");
+            // Print the board
+            Console.WriteLine("\nCurrent Board:");
             for (int i = 0; i < 3; i++)
             {
-                Console.Write((i + 1) + " ");
                 for (int j = 0; j < 3; j++)
                 {
-                    Console.Write(" " + array[i, j] + " ");
+                    Console.Write($" {board[i, j]} ");
+                    if (j < 2) Console.Write("|");
                 }
+                Console.WriteLine();
+                if (i < 2) Console.WriteLine("---+---+---");
             }
-
-            return array;
+            Console.WriteLine();
         }
 
-        public bool CheckWinner(char[,] array)
+        // Method to check if the selected move is valid
+        public bool IsPossible(char[,] board, int row, int column)
         {
-            bool hasWinner = false;
-
-            // Check along rows
-            for (int i = 0; i < 3; i++)
+            // Check if the cell is within bounds and empty
+            if (row >= 0 && row < 3 && column >= 0 && column < 3)
             {
-                if (array[i, 1] == array[i, 0] && array[i, 2] == array[i, 0])
+                if (board[row,column] != ' ')
                 {
-                    hasWinner = true;
+                    Console.WriteLine("This spot is already taken. Choose another spot.");
+                    return false;
+                }
+                else
+                {
+                    return true;
                 }
             }
-
-            // Check along columns
-            for (int i = 0; i < 3; i++)
+            
+            else
             {
-                if (array[0, i] == array[1, i] && array[0, i] == array[2, i])
-                {
-                    hasWinner = true;
-                }
+                Console.WriteLine("Invalid position, so please choose a valid place.");
+                return false;
             }
-
-            // Check along diagonals
-            if (array[0, 0] == array[1, 1] && array[0, 0] ==  (array[2, 2])
-            {
-                hasWinner = true;
-            }
-
-            else if (array[0, 2] == array[1, 1] && array[0, 2] == (array[2, 0])
-            {
-                hasWinner = true;
-            }
-
-            return hasWinner;
+            
         }
 
+        // Method to check if there is a winner
+        public bool CheckWinner(char[,] board)
+        {
+            // Check rows and columns for a winner
+            for (int i = 0; i < 3; i++)
+            {
+                if (board[i, 0] != ' ' && board[i, 0] == board[i, 1] && board[i, 0] == board[i, 2]) return true; // Row
+                if (board[0, i] != ' ' && board[0, i] == board[1, i] && board[0, i] == board[2, i]) return true; // Column
+            }
+
+            // Check diagonals for a winner
+            if (board[0, 0] != ' ' && board[0, 0] == board[1, 1] && board[0, 0] == board[2, 2]) return true; // Top-left to bottom-right
+            if (board[0, 2] != ' ' && board[0, 2] == board[1, 1] && board[0, 2] == board[2, 0]) return true; // Top-right to bottom-left
+
+            // No winner found
+            return false;
+        }
     }
 }
