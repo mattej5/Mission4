@@ -28,7 +28,7 @@ Console.WriteLine("Player 1, you will be X's ");
 Console.WriteLine("Player 2, you will be O's ");
    
 
-ttt.PrintBoard(board);
+ttt.PrintBoard(board,row, column, roundNumber);
 
 //do while loop to play until win
 do
@@ -42,9 +42,9 @@ do
     
     //printing to show progress and what has been done
     
-    if (ttt.isPossible(row, column))
+    if (ttt.IsPossible(board, row, column))
     {
-        ttt.PrintBoard(row, column, roundNumber);
+        ttt.PrintBoard(board,row, column, roundNumber);
         roundNumber++;
     }
     else
@@ -52,9 +52,9 @@ do
         Console.WriteLine("That space is already taken.");
     }
 
-} while (!ttt.winCase && roundNumber < 9);
+} while (!ttt.CheckWinner(board) && roundNumber < 9);
 
-if (ttt.winCase)
+if (ttt.CheckWinner(board))
 {
     Console.WriteLine($"Player {(roundNumber % 2 == 0 ? 2 : 1)} wins!");
 }
