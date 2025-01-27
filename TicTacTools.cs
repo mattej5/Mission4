@@ -35,7 +35,6 @@
             {
                 if (board[row,column] != ' ')
                 {
-                    Console.WriteLine("This spot is already taken. Choose another spot.");
                     return false;
                 }
                 else
